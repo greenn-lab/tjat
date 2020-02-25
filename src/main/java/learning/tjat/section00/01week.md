@@ -84,4 +84,50 @@ class StudyTest {
 
 ![](IMG02.png)
 
-이렇게 테스트 Life Cycle 에 대응하는 애들도 있어요. 
+이렇게 테스트 Life Cycle 에 대응하는 애들도 있어요.
+
+`@Disabled` 라는 건 테스트를 off 시켜요. 
+```java
+class StudyTest { 
+  @Test
+  @Diabled
+  void test() {
+    Study study = new Study();
+    
+    assertNotNull(study);
+  }
+  
+  // ...
+}
+```
+
+이러면 테스트가 실행되지 않아요.
+
+테스트의 이름을 정하는 건데,
+```java
+class StudyTest {
+  
+  @Test
+  @DisplayName("학습 테스트에요.")
+  void test() {
+    Study study = new Study();
+    
+    assertNotNull(study);
+  }
+  
+  @Test
+  @DisplayName("또다른 학습 테스트에요.")
+  void test2() {
+    Study study = new Study();
+    
+    assertNotNull(study);
+  }
+  
+  // ...
+}
+```
+
+![](IMG03.png)
+
+이렇게 알아보기 좋은 이름으로 테스트가 나오기도 하네요!
+
