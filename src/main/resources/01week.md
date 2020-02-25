@@ -24,7 +24,6 @@ public repository 니까 공유해도 상관 없겠죠?
 ![](IMG01.png)  
 JUnit 은 java 개발자 93% 가 사용 중이래요. 대중적인 테스트 프레임웍이라고 보면 되겠네요.
 
-[AppTest.java](../../../../../test/java/learning/tjat/section00/AppTest.java)
 ```java
 class AppTest {
   
