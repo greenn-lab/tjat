@@ -1,4 +1,4 @@
-package learning.tjat.section01;
+package learning.tjat.part1.section01;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;

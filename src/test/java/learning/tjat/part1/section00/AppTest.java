@@ -1,4 +1,4 @@
-package learning.tjat.section00;
+package learning.tjat.part1.section00;
 
 import org.junit.jupiter.api.Test;
 
