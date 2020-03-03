@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudyTest {
@@ -46,6 +49,24 @@ class StudyTest {
     assertThrows(IllegalArgumentException.class,
         () -> new Study(-10));
     
+  }
+  
+  @Test
+  @DisplayName("timeout 내에 처리가 되어야해요.")
+  void should_finish_in_time() {
+    assertTimeout(Duration.ofMillis(100), () -> {
+      System.out.println("some execution ...");
+      TimeUnit.MILLISECONDS.sleep(10000);
+    });
+  }
+  
+  @Test
+  @DisplayName("timeout 내에 처리가 되어야해요.")
+  void should_finish_in_time_preemptively() {
+    assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
+      System.out.println("some execution ...");
+      TimeUnit.MILLISECONDS.sleep(10000);
+    });
   }
   
 }

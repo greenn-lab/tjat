@@ -108,5 +108,42 @@ class StudyTest {
 ```
 이렇게 예외를 받는 테스트도 할 수 있어요. JUnit4 보다 더 편해진 것 같네요!
 
+```java
+class StudyTest {
+  // ...
+  @Test
+  @DisplayName("timeout 내에 처리가 되어야해요.")
+  void should_finish_in_time() {
+    assertTimeout(Duration.ofMillis(100), () -> {
+      System.out.println("some execution ...");
+      TimeUnit.MILLISECONDS.sleep(200);
+    });
+  } 
+}
+```
+이렇게 실행하면
+![](images/IMG06.png)  
+이렇게 100ms 내에 끝나야하는데, 300ms 를 지연시켜서 시간이 초과했다고 오류가 나요.
+ 
+```java
+  @Test
+  @DisplayName("timeout 내에 처리가 되어야해요.")
+  void should_finish_in_time_preemptively() {
+    assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
+      System.out.println("some execution ...");
+      TimeUnit.MILLISECONDS.sleep(200);
+    });
+  }
+```
+비슷한데, 이런식으로 preemptively (선제, 선취, 우선순위) 하게 할 수 있는데, timeout 에 우선 순위를 둬서,
+테스트 코드를 끝까지 처리하지 못해도 제한된 시간이 지나면 그냥 끝내버리는 거고.
+`assertTimeout(...)` 은 그래도 테스트 실행을 끝까지 지켜본다는 차이가 있어요. `assertTimeoutPreemptively(...)` 는 `ThreadLocal` 같은 테스트에는 적합하지 않대요.
+아마도 제한된 시간이 지나면 thread 를 죽이는데, `ThreadLocal` 을 이용하면 참조된 메모리 때문에 thread 가 죽질 않아서 그런게 아닐까 싶긴 하네요.
+(테스트는 안해 봄;;;)
 
+[AssertJ](https://joel-costigliola.github.io/assertj/) 나 [Hamcrest](http://hamcrest.org/), [Truth](https://truth.dev/) 등등의 Assertion 지원 도구들이 있고, 취향대로 골라 쓰라는 말씀.
+아마도 예전엔 AssertJ 를 은근 썼는데, JUnit5 에서 기본적으로 제공하는 assertion 이 다양해져서 굳이 의존성 추가해 가면서 다른 도구를 추가하지 않게 되지 않을까 하는 개인적인 생각이에요.
+
+
+# 조건에 따라 테스트하기
 
