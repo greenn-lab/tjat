@@ -24,5 +24,8 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeTags 'for-unit-test'
+        // excludeTags 'all-for-test'
+    }
 }

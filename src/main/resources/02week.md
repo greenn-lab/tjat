@@ -109,4 +109,118 @@ class StudyTest {
 이렇게 예외를 받는 테스트도 할 수 있어요. JUnit4 보다 더 편해진 것 같네요!
 
 
+# 조건에 따라 테스트 실행하기
 
+System property 등등 환경적 요인을 기준으로 테스트를 실행 할지 말지를 결정하는 게 있어요.
+`Assumptions` 클래스의 메소드를 이용하면 돼요. 
+
+```java
+  @Test
+  @DisplayName("assumptions")
+  void should_ignore_this_os() {
+    final String ANDROMEDA = "Andromeda";
+
+    System.setProperty("OS", ANDROMEDA);
+    assumeTrue(ANDROMEDA.equals(System.getProperty("OS")));
+    
+    Study study = new Study();
+    
+    assertNotNull(study);
+    assertEquals(StudyStatus.DRAFT, study.getStatus(),
+        "스터디를 처음 만들면, DRAFT 상태여야 하겠죠.");
+  }
+```
+![](images/IMG07.png)  
+그림처럼 테스트 결과는 성공이라고 나오고, 테스트가 아예 실행되지 않았어요.
+
+```java
+  @Test
+  @DisplayName("assumptions")
+  @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_9})
+  void should_ignore_this_test() {
+    Study study = new Study();
+    
+    assertNotNull(study);
+    assertEquals(StudyStatus.DRAFT, study.getStatus(),
+        "스터디를 처음 만들면, DRAFT 상태여야 하겠죠.");
+  }
+```
+저는 지금 openjdk 11 에서 실행하고 있으니깐 해당 테스트 결과는..
+![](images/IMG08.png)  
+역시 테스트가 ignored 됐어요.
+
+```java
+  @Test
+  @DisplayName("assumptions #3")
+  @EnabledIfEnvironmentVariable(named = "HOME", matches = "(/\\w+)+")
+  void should_ignore_this_env() {
+    Study study = new Study();
+    
+    assertNotNull(study);
+    assertEquals(StudyStatus.DRAFT, study.getStatus(),
+        "스터디를 처음 만들면, DRAFT 상태여야 하겠죠.");
+  }
+```
+`@EnabledIfEnvironmentVariable` 는 환경변수에 따라 결정하는데, 정규표현식으로 확인을 해요.
+제가 지금 `HOME` 이라는 환경변수가 `/Users/green` 이니까, match 가 돼서 테스트가 실행되고 결과는 실패라고 나왔어요.
+![](images/IMG09.png)  
+
+
+# Tagging And Filtering
+
+테스트에 tag 를 달아서 특정 tag 만 실행 할 수 있어요.
+
+```java
+@Tag("all-for-test")
+class StudyTest {
+  @Test
+  @DisplayName("tagging test")
+  @Tag("for-unit-test")
+  void should_execute_for_unit_test() {
+    Study study = new Study();
+    assertNotNull(study);
+  }
+  
+  @Test
+  @DisplayName("tagging test")
+  @Tag("for-TDD")
+  void should_execute_for_tdd() {
+    Study study = new Study();
+    assertEquals(StudyStatus.DRAFT, study.getStatus(),
+        "스터디를 처음 만들면, DRAFT 상태여야 하겠죠.");
+  } 
+}
+```
+`@Tag` 는 `@Target({ ElementType.TYPE, ElementType.METHOD })` 이렇게 사용할 수 있어요.
+
+이렇게 하고 gradle 을 이용한다면
+```gradle
+// build.gradle
+test {
+    useJUnitPlatform {
+        includeTags 'for-unit-test'
+        excludeTags 'all-for-test'
+    }
+}
+```
+이렇게 하면, 
+![](images/IMG10.png)  
+이렇게 되고
+```gradle
+// build.gradle
+test {
+    useJUnitPlatform {
+        includeTags 'for-unit-test'
+        // excludeTags 'all-for-test'
+    }
+}
+```
+이렇게 하면,
+![](images/IMG11.png)  
+`includeTags 'for-unit-test'` 에 맞는 `@Tag` 의 테스트 들이 실행 되는 거죠.
+
+강의 설명보다
+[https://mkyong.com/junit5/junit-5-tagging-and-filtering-tag-examples/](https://mkyong.com/junit5/junit-5-tagging-and-filtering-tag-examples/)
+여기 링크에 더 잘 설명 돼 있는 것 같아요.
+
+빌드 환경에 맞춰서 테스트를 만들어도 될 것 같고, 개발자 별로 따로 테스트를 만들어서 확인하거나 할 때도 의미 있을 것 같다는 생각이에요.
