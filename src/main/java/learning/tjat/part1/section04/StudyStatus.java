@@ -1,4 +1,4 @@
-package learning.tjat.part1.section04.section03;
+package learning.tjat.part1.section04;
 
 public enum StudyStatus {
   DRAFT,
