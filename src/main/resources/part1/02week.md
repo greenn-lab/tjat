@@ -34,7 +34,7 @@ class StudyTest {
 }
 ```
 `assertEquals` 와 같이 assertion 을 쓰고 마지막 파라미터로 메세지를 던질 수 있어요.  
-![](images/IMG04.png)  
+![](IMG04.png)  
 예쁘게 설명이 나와요. 테스트를 만들고 한참 후에 다시 코드를 봤을 때나 한참 후에 어떤 부작용으로 테스트가 깨져서 다시 살펴볼 때, 유용하겠죠?!
 
 ```java
@@ -74,7 +74,7 @@ class StudyTest {
 ```
 만약 이런 테스트가 있으면, 2개의 assertion 이 있는데 첫번째에서 깨지니깐 2번째는 확인도 못해보게 돼요.
 그래서 하나가 깨져도 마저 테스트를 실행해주는게 있죠.  
-![](images/IMG05.png)  
+![](IMG05.png)  
 `2 failures` 라고 나오죠.
 
 ```java
@@ -122,7 +122,7 @@ class StudyTest {
 }
 ```
 이렇게 실행하면
-![](images/IMG06.png)  
+![](IMG06.png)  
 이렇게 100ms 내에 끝나야하는데, 300ms 를 지연시켜서 시간이 초과했다고 오류가 나요.
  
 ```java
@@ -162,7 +162,7 @@ System property 등등 환경적 요인을 기준으로 테스트를 실행 할�
         "스터디를 처음 만들면, DRAFT 상태여야 하겠죠.");
   }
 ```
-![](images/IMG07.png)  
+![](IMG07.png)  
 그림처럼 테스트 결과는 성공이라고 나오고, 테스트가 아예 실행되지 않았어요.
 
 ```java
@@ -178,7 +178,7 @@ System property 등등 환경적 요인을 기준으로 테스트를 실행 할�
   }
 ```
 저는 지금 openjdk 11 에서 실행하고 있으니깐 해당 테스트 결과는..
-![](images/IMG08.png)  
+![](IMG08.png)  
 역시 테스트가 ignored 됐어요.
 
 ```java
@@ -195,7 +195,7 @@ System property 등등 환경적 요인을 기준으로 테스트를 실행 할�
 ```
 `@EnabledIfEnvironmentVariable` 는 환경변수에 따라 결정하는데, 정규표현식으로 확인을 해요.
 제가 지금 `HOME` 이라는 환경변수가 `/Users/green` 이니까, match 가 돼서 테스트가 실행되고 결과는 실패라고 나왔어요.
-![](images/IMG09.png)  
+![](IMG09.png)  
 
 
 # Tagging And Filtering
@@ -236,7 +236,7 @@ test {
 }
 ```
 이렇게 하면, 
-![](images/IMG10.png)  
+![](IMG10.png)  
 이렇게 되고
 ```gradle
 // build.gradle
@@ -248,6 +248,6 @@ test {
 }
 ```
 이렇게 하면,
-![](images/IMG11.png)  
+![](IMG11.png)  
 `includeTags 'for-unit-test'` 에 맞는 `@Tag` 의 테스트 들이 실행 되는 거죠.
 

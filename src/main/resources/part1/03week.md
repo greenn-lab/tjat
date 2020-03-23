@@ -56,7 +56,7 @@ class StudyTest {
 }
 ```
 이렇게 실행하면,  
-![](images/IMG12.png)  
+![](IMG12.png)  
 배열처럼 저렇게 신기하게 나오네요.
 
 이뿐만 아니라 저 테스트 메서드의 인자로 `RepetitionInfo` 객체를 받을 수 있어요.
@@ -77,7 +77,7 @@ class StudyTest {
 }
 ```
 이렇게 하면,
-![](images/IMG13.png)  
+![](IMG13.png)  
 이렇게 실행 순번을 받아서 테스트를 할 수도 있네요.
 유용할 것 같아요~!
 
@@ -95,10 +95,10 @@ class StudyTest {
 }
 ```
 이러면,
-![](images/IMG14.png)  
+![](IMG14.png)  
 이렇게 여러가지 경우의 수를 등록해두고 쓸 수도 있겠어요.
 
-![](images/IMG15.png)  
+![](IMG15.png)  
 `@ValueSource` 가 가지는 속성들이에요. 뭔가 아쉽지만...  
 
 하지만, 그래서~ `@ConvertWith(...)` 가 있어요. 
@@ -125,7 +125,7 @@ class StudyTest {
 }
 ```
 
-![](images/IMG16.png)  
+![](IMG16.png)  
 
 
 이제 한걸음 더 나아가 봐요.
@@ -153,7 +153,7 @@ public class LectureTest {
 테스트 메서드의 파라미터로 정의된 `ArgumentsAccessor` 클래스.
 그리고, 그것의 인스턴스가 가진 메서드 `.getString(...)`, `.getInteger(...)` 로 CSV 값을 받을 수 있어요.
 
-![](images/IMG17.png)  
+![](IMG17.png)  
 잘 되네요.
 
 조금 더 세련되게 접근해볼까요?  
@@ -184,7 +184,7 @@ class LectureTest {
 그럼 그걸 이용해서 `@AggregateWith(...)` 를 해주고요.
 
 말해 뭐하겠나마는
-![](images/IMG18.png)  
+![](IMG18.png)  
 잘 실행이 됐죠.
 
 > `@ParameterizedTest(name = " ... {displayName} {index}")`

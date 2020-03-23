@@ -21,7 +21,7 @@ public repository 니까 공유해도 상관 없겠죠?
 [https://junit.org/junit5/docs/current/user-guide/](https://junit.org/junit5/docs/current/user-guide/)
 친절한 가이드. 이것만 보면 JUnit5 마스터! 😃
 
-![](images/IMG01.png)  
+![](IMG01.png)  
 JUnit 은 java 개발자 93% 가 사용 중이래요. 대중적인 테스트 프레임웍이라고 보면 되겠네요.
 
 ```java
@@ -81,7 +81,7 @@ class StudyTest {
 }
 ```
 
-![](images/IMG02.png)
+![](IMG02.png)
 
 이렇게 테스트 Life Cycle 에 대응하는 애들도 있어요.
 
@@ -126,7 +126,7 @@ class StudyTest {
 }
 ```
 
-![](images/IMG03.png)
+![](IMG03.png)
 
 이렇게 알아보기 좋은 이름으로 테스트가 나오기도 하네요!
 
