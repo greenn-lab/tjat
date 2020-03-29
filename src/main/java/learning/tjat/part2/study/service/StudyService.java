@@ -23,7 +23,20 @@ public class StudyService {
             -> new IllegalArgumentException("member must not be null"))
     );
   
-    return studyRepository.save(study);
+    final Study newStudy = studyRepository.save(study);
+
+    memberService.notify(newStudy);
+  
+    return newStudy;
   }
+
+  public Study openStudy(Study study) {
+    study.open();
+    Study openedStudy = studyRepository.save(study);
+    memberService.notify(openedStudy);
+    
+    return openedStudy;
+  }
+  
   
 }

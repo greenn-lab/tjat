@@ -169,7 +169,7 @@ class StudyServiceTest {
 ```
 
 헥헥, 성공!  
-![](IMG004.png)  
+![](IMG04.png)  
 
 테스트에 `when(...)` 하고 `thenReturn(...)` 만 섰는데, 다양한 matcher 와 then 이 있다고 해요.
 [mockito javadoc](https://javadoc.io/static/org.mockito/mockito-core/3.3.3/index.html) 에서 다양한 예제를 만날 수 있네요.

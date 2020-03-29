@@ -11,7 +11,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,8 +30,6 @@ class StudyServiceTest {
   
   @Test
   void shouldCreateStudy() {
-    
-    final Study java = new Study();
     final StudyService service = new StudyService(
         memberService, studyRepository);
   
@@ -35,11 +38,24 @@ class StudyServiceTest {
             .memberId(1L)
             .email("tester@test.com")
             .age(120).build());
-    
-    when(memberService.getMemberById(1L))
-        .thenReturn(member);
   
-    final Study study = service.createStudy(1L, java);
+    final Study usingTestInJava = new Study();
+  
+    // GIVEN
+    given/*when*/(memberService.getMemberById(1L))
+        .willReturn/*thenReturn*/(member);
+    given/*when*/(studyRepository.save(usingTestInJava))
+        .willReturn/*thenReturn*/(usingTestInJava);
+    
+    // WHEN
+    final Study study = service.createStudy(1L, usingTestInJava);
+    
+    // THEN
+    // verify(memberService, times(1)).notify(study);
+    then(memberService).should(times(1)).notify(study);
+    //verify(memberService, never()).validate(any());
+    then(memberService).should(never()).validate(any());
+
   }
   
 }
