@@ -1,36 +1,39 @@
-package learning.tjat.part2;
+package learning.tjat.part3.model.entity;
 
-import learning.tjat.part2.member.model.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 public class Study {
   
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   
   private String name;
   
+  @Enumerated(EnumType.STRING)
   private Status status;
   
   @ManyToOne
-  @Setter
-  @Getter
   private Member owner;
   
-  @Getter
   private LocalDateTime opened;
   
   public void open() {
@@ -38,7 +41,7 @@ public class Study {
     status = Status.OPENED;
   }
   
-  public static enum Status {
+  public enum Status {
     READY, OPENED
   }
 }
