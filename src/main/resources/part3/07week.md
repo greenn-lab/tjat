@@ -21,4 +21,8 @@ CI 툴이 빌드 할 때? 초기화된 테스트?  그런 시나리오로 테스
 [StudyService.java](../../java/learning/tjat/part3/service/StudyService.java)  
 
 이렇게 했어요.  
-docker container 로 DB를 띄우고, 거기에 위 어플리케이션을 연결해서 띄워 볼거에요. 
+docker container 로 DB를 띄우고, 거기에 위 어플리케이션을 연결해서 띄워 볼거에요.
+
+
+# Testcontainers 설치
+ 
