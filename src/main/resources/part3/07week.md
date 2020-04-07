@@ -9,3 +9,16 @@ CI 툴이 빌드 할 때? 초기화된 테스트?  그런 시나리오로 테스
 자! 우리는 언제 어떤 상황에 맞닥트릴 지 모르는 험난하고 고단한 개발자니까, 전방위적인 경험과 학습이 필요하겠죠?!
 
 지금까지 해오던 스터디 예제를 실제 작동되는 코드로 만들어요. 어플리케이션 배포 상황을 예시해서.
+
+코드를 수정했는데...
+
+[Application.java](../../java/learning/tjat/part3/Application.java)    
+[Member.java](../../java/learning/tjat/part3/model/entity/Member.java)  
+[Study.java](../../java/learning/tjat/part3/model/entity/Study.java)  
+[MemberRepository.java](../../java/learning/tjat/part3/repository/MemberRepository.java)  
+[StudyRepository.java](../../java/learning/tjat/part3/repository/StudyRepository.java)  
+[MemberService.java](../../java/learning/tjat/part3/service/MemberService.java)  
+[StudyService.java](../../java/learning/tjat/part3/service/StudyService.java)  
+
+이렇게 했어요.  
+docker container 로 DB를 띄우고, 거기에 위 어플리케이션을 연결해서 띄워 볼거에요. 
